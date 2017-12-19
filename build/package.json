@@ -29,7 +29,7 @@
     "start": "egg-scripts start --daemon",
     "ts": "./node_modules/nodemon/bin/nodemon.js",
     "stop": "egg-scripts stop",
-    "dev": "egg-bin dev ./build",
+    "dev": "egg-bin dev",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "egg-bin test",
