@@ -10,7 +10,7 @@ export default class FoodService extends Service {
         const html = await this.ctx.curl(this.getConfig().news.serverUrl + keyword, {
             dataType: 'text'
         });
-        console.log(this.ctx.helper.foo)
+        console.log(this.ctx.helper.foo())
 
         const doc = cheerio.load(html.data);
         const parsedDoc = doc('div[class="text-box pull-left"]').find('h4').find('a')
