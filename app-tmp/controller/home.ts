@@ -3,7 +3,7 @@ import { Controller } from 'egg';
 
 class HomeController extends Controller {
     async index() {
-        const number = await this.ctx.service.food.getFood('tiptop');
+        const number = await this.ctx.service.food.getFood('苹果');
         this.ctx.body = `Hello world,I am using typescript ${number}`;
         this.ctx.set('Content-Type', 'text/html;charset=utf-8');
     }

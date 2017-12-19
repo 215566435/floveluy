@@ -5,13 +5,14 @@ export default class FoodService extends Service {
     getConfig() {
         return this.app.config;
     }
+    getUtils() {
+        return this.ctx.helper.utils
+    }
 
     async getFood(keyword: string): Promise<string> {
-        const html = await this.ctx.curl(this.getConfig().news.serverUrl + keyword, {
+        const html = await this.ctx.curl(this.getConfig().news.serverUrl + encodeURI(keyword), {
             dataType: 'text'
         });
-        console.log(this.ctx.helper.foo())
-
         const doc = cheerio.load(html.data);
         const parsedDoc = doc('div[class="text-box pull-left"]').find('h4').find('a')
         if (parsedDoc.length > 0) {
