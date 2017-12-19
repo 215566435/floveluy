@@ -2,11 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const egg_1 = require("egg");
 const cheerio = require("cheerio");
-class FooService extends egg_1.Service {
+class FoodService extends egg_1.Service {
     getConfig() {
         return this.app.config;
     }
-    async bar() {
+    async getFood() {
         const html = await this.ctx.curl(this.getConfig().news.serverUrl, {
             dataType: 'text'
         });
@@ -18,4 +18,4 @@ class FooService extends egg_1.Service {
         return html.data;
     }
 }
-module.exports = FooService;
+exports.default = FoodService;
