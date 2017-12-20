@@ -1,33 +1,8 @@
 # floveluy
 
-a project for fitness
+egg.js 使用typescript的时候还是挺坑的
 
-## QuickStart
-
-<!-- add docs here for user -->
-
-see [egg docs][egg] for more detail.
-
-### Development
-
-```bash
-$ npm i
-$ npm run dev
-$ open http://localhost:7001/
-```
-
-### Deploy
-
-```bash
-$ npm start
-$ npm stop
-```
-
-### npm scripts
-
-- Use `npm run lint` to check code style.
-- Use `npm test` to run unit test.
-- Use `npm run autod` to auto detect dependencies upgrade, see [autod](https://www.npmjs.com/package/autod) for more detail.
-
-
-[egg]: https://eggjs.org
+1.没有一件构建的脚本
+2.单元测试的时候频繁出错
+3.egg-bin这个工具得深入研究才能够使得调试的时候方便
+4.egg.js项目极其依赖目录的层级关系，一旦错误，会导致乱七八糟的问题
