@@ -4,6 +4,7 @@ const egg_1 = require("egg");
 class HomeController extends egg_1.Controller {
     async index() {
         const foodspec = await this.ctx.service.food.calulate(['苹果130']);
+        this.ctx.service.Database;
         this.ctx.body = `<h5>${foodspec.title}</h5>
         <p>${foodspec.cal}</p>
         <p>${foodspec.carbs}</p>

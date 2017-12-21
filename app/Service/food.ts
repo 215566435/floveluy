@@ -59,7 +59,6 @@ export default class FoodService extends Service {
             const name = this.ctx.helper.utils.regxChinese(food);
             const weight = this.ctx.helper.utils.regxNumber(food);
             const spec = await this.getSingleFood(name + '');
-            console.log(spec.title + 'asdasdasd')
             return {
                 title: spec.title,
                 carbs: this.ctx.helper.utils.caculate(spec.carbs, weight),
@@ -131,8 +130,3 @@ export default class FoodService extends Service {
     }
 }
 
-declare module 'egg' {
-    export interface IService {
-        food: FoodService;
-    }
-}

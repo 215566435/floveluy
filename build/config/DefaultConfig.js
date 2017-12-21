@@ -6,6 +6,13 @@ class DefaultConfig {
             FOOD_URL: 'http://www.boohee.com/',
             SEARCH_URL: 'http://www.boohee.com/food/search?keyword=',
         };
+        this.database = {
+            database: 'trainnote',
+            username: 'root',
+            password: 'metal_gear2',
+            host: 'localhost',
+            port: '3306'
+        };
     }
 }
 exports.DefaultConfig = DefaultConfig;

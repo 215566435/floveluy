@@ -4,6 +4,7 @@ import { Controller } from 'egg';
 class HomeController extends Controller {
     async index() {
         const foodspec = await this.ctx.service.food.calulate(['苹果130']);
+        this.ctx.service.Database
 
         this.ctx.body = `<h5>${foodspec.title}</h5>
         <p>${foodspec.cal}</p>
