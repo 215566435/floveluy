@@ -5,7 +5,7 @@ class helper {
         return encodeURI(url);
     }
     regxChinese(string) {
-        return string.match('[\u4e00-\u9fa5]+') + '';
+        return string.match('[^0-9]+') + '';
     }
     regxNumber(string) {
         const int = string.match(/\d+(\.\d+)/g);
@@ -15,6 +15,9 @@ class helper {
         else {
             return int + '';
         }
+    }
+    caculate(spec, weight) {
+        return Math.round((parseFloat(spec + '') / 100 * parseFloat(weight))) + '';
     }
 }
 exports.default = {
