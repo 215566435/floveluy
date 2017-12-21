@@ -6,13 +6,11 @@
   "dependencies": {
     "@types/cheerio": "^0.22.6",
     "@types/egg": "^1.0.3",
-    "@types/sequelize": "^4.0.80",
     "cheerio": "^1.0.0-rc.2",
     "egg": "^2.0.0",
     "egg-scripts": "^2.1.0",
     "egg-view-nunjucks": "^2.1.4",
-    "nodemon": "^1.13.3",
-    "sequelize": "^4.28.6"
+    "nodemon": "^1.13.3"
   },
   "devDependencies": {
     "autod": "^3.0.1",

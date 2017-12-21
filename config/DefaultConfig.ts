@@ -1,8 +1,8 @@
 'use strict';
 export class DefaultConfig {
-  news = {
-    pageSize: 30,
-    serverUrl: 'http://www.boohee.com/food/search?keyword=',
+  bohee = {
+    FOOD_URL: 'http://www.boohee.com/',
+    SEARCH_URL: 'http://www.boohee.com/food/search?keyword=',
   };
 };
 
