@@ -81,22 +81,27 @@ export default class DatabaseService extends Service {
     }
 
     async checkfood(sname: string): Promise<FoodSpec | null> {
-        const food = await this.temp_makeTable();
-        const result = await food.findAll({
-            where: {
-                sname: sname
+        try {
+            const food = await this.temp_makeTable();
+            const result = await food.findAll({
+                where: {
+                    sname: sname
+                }
+            })
+            if (result.length === 1) {
+                const res: { [string: string]: any } = result[0];
+                return {
+                    title: res['fullname'],
+                    carbs: res['carb'],
+                    cal: res['cal'],
+                    pro: res['pro'],
+                    fat: res['fat']
+                }
             }
-        })
-        if (result.length === 1) {
-            const res: { [string: string]: any } = result[0];
-            return {
-                title: res['fullname'],
-                carbs: res['carb'],
-                cal: res['cal'],
-                pro: res['pro'],
-                fat: res['fat']
-            }
+        } catch (e) {
+            this.app.logger.error(e);
         }
+
         return null
     }
 }

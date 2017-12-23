@@ -30,7 +30,7 @@
     "node": ">=8.9.0"
   },
   "scripts": {
-    "start": "egg-scripts start --daemon",
+    "start": "egg-scripts start --daemon ./build",
     "ts": "./node_modules/nodemon/bin/nodemon.js",
     "stop": "egg-scripts stop",
     "dev": "egg-bin dev ./build --port 7002",
