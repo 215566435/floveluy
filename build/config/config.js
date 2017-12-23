@@ -5,5 +5,6 @@ const DefaultConfig_1 = require("./DefaultConfig");
 exports.default = (appInfo) => {
     const config = {};
     config.keys = 'floveluyKey12356';
+    config.middleware = ['wechat'];
     return Object.assign({}, config, DefaultConfig_1.default);
 };

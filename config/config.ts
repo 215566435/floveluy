@@ -6,5 +6,6 @@ import defaultConfig from './DefaultConfig'
 export default (appInfo: EggAppConfig) => {
     const config: any = {};
     config.keys = 'floveluyKey12356';
+    config.middleware = ['wechat'];
     return { ...config, ...defaultConfig };
 };
