@@ -59,6 +59,10 @@ class FoodService extends egg_1.Service {
         return specs;
     }
     async getSingleFood(keyword) {
+        const res = await this.ctx.service.database.checkfood(keyword);
+        if (res) {
+            return res;
+        }
         const htmlText = await this.getText(this.getConfig().bohee.SEARCH_URL + encodeURI(keyword));
         const doc = cheerio.load(htmlText.data);
         const parsedDoc = doc('div[class="text-box pull-left"]').find('h4').find('a');
@@ -67,6 +71,7 @@ class FoodService extends egg_1.Service {
             const title = parsedDoc[0].attribs['title'];
             const herf = parsedDoc[0].attribs['href'];
             const foodSpec = await this._getFood(herf);
+            await this.ctx.service.database.temp_insert(Object.assign({}, foodSpec, { title: title }), keyword);
             return Object.assign({}, foodSpec, { title: title });
         }
         return {

@@ -2,7 +2,7 @@ import { Service } from "egg";
 import * as cheerio from 'cheerio';
 // import * as sequelize from 'sequelize';
 
-interface FoodSpec {
+export interface FoodSpec {
     title: string | undefined,
     carbs: string | undefined,
     fat: string | undefined,
@@ -16,7 +16,6 @@ export default class FoodService extends Service {
         super(props);
 
     }
-
     getConfig() {
         return this.app.config;
     }
@@ -75,6 +74,10 @@ export default class FoodService extends Service {
     }
 
     async getSingleFood(keyword: string): Promise<FoodSpec> {
+        const res = await this.ctx.service.database.checkfood(keyword);
+        if (res) {
+            return res
+        }
         const htmlText = await this.getText(this.getConfig().bohee.SEARCH_URL + encodeURI(keyword))
         const doc = cheerio.load(htmlText.data);
         const parsedDoc = doc('div[class="text-box pull-left"]').find('h4').find('a');
@@ -84,6 +87,8 @@ export default class FoodService extends Service {
             const title = parsedDoc[0].attribs['title'];
             const herf = parsedDoc[0].attribs['href'];
             const foodSpec = await this._getFood(herf);
+            await this.ctx.service.database.temp_insert({ ...foodSpec, title: title }, keyword);
+
             return { ...foodSpec, title: title };
         }
 
