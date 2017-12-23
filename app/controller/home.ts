@@ -11,6 +11,7 @@ class HomeController extends Controller {
         <p>${foodspec.pro}</p>
         注意：如果出现0g的数字，代表这种元素在此类物品里量太少，忽略不计`;
 
+        
         this.ctx.set('Content-Type', 'text/html;charset=utf-8');
     }
 }
