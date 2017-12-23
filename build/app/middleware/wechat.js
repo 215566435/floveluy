@@ -11,7 +11,6 @@ module.exports = (options) => {
                         buf += chunk;
                     });
                     ctx.req.on('end', () => {
-                        console.log('解析完毕', buf);
                         resolve(buf);
                     });
                 }
@@ -20,8 +19,8 @@ module.exports = (options) => {
                 }
             });
             let result = await awaitBody;
-            console.log(xmlparser.toJson(result));
-            // ctx.request.body = .;
+            let json = xmlparser.toJson(result);
+            ctx.request.body = JSON.parse(json);
         }
         await next();
     };

@@ -18,6 +18,16 @@ class helper {
     caculate(spec: string | undefined, weight: string): string {
         return Math.round((parseFloat(spec + '') / 100 * parseFloat(weight))) + ''
     }
+    returnWechatMsg(toUser: string, msg: string) {
+
+        return `<xml> 
+        <ToUserName>< ![CDATA[${toUser}] ]></ToUserName> 
+        <FromUserName>< ![CDATA[gh_cb7321b27e37] ]></FromUserName> 
+        <CreateTime>12345678</CreateTime> 
+        <MsgType>< ![CDATA[text] ]></MsgType> 
+        <Content>< ![CDATA[${msg}] ]></Content> 
+        </xml>`
+    }
 }
 
 export default {

@@ -12,7 +12,6 @@ module.exports = (options: any) => {
                         buf += chunk
                     })
                     ctx.req.on('end', () => {
-                        console.log('解析完毕', buf)
                         resolve(buf);
                     })
                 } catch (e) {
@@ -20,8 +19,8 @@ module.exports = (options: any) => {
                 }
             })
             let result: any = await awaitBody;
-            console.log(xmlparser.toJson(result));
-            // ctx.request.body = .;
+            let json = xmlparser.toJson(result)
+            ctx.request.body = JSON.parse(json);
 
         }
         await next();
