@@ -7,5 +7,10 @@ export default (appInfo: EggAppConfig) => {
     const config: any = {};
     config.keys = 'floveluyKey12356';
     config.middleware = ['wechat'];
+    config.security = {
+        csrf: {
+            enable: false,
+        }
+    };
     return { ...config, ...defaultConfig };
 };

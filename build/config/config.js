@@ -6,5 +6,10 @@ exports.default = (appInfo) => {
     const config = {};
     config.keys = 'floveluyKey12356';
     config.middleware = ['wechat'];
+    config.security = {
+        csrf: {
+            enable: false,
+        }
+    };
     return Object.assign({}, config, DefaultConfig_1.default);
 };
