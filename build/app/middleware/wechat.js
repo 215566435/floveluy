@@ -5,5 +5,6 @@ module.exports = (options) => {
         if (ctx.request.headers['content-type'] === 'text/xml') {
             console.log(ctx.request.body);
         }
+        await next();
     };
 };
