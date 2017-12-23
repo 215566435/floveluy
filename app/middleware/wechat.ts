@@ -19,9 +19,9 @@ module.exports = (options: any) => {
                     reject(e);
                 }
             })
-            let result = await awaitBody;
-            console.log(result);
-            // ctx.request.body = xmlparser.toJson(result);
+            let result: any = await awaitBody;
+            console.log(xmlparser.toJson(result));
+            // ctx.request.body = .;
 
         }
         await next();

@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const xmlparser = require("xml2json");
 module.exports = (options) => {
     return async function wechat(ctx, next) {
         if (ctx.request.headers['content-type'] === 'text/xml') {
@@ -19,8 +20,8 @@ module.exports = (options) => {
                 }
             });
             let result = await awaitBody;
-            console.log(result);
-            // ctx.request.body = xmlparser.toJson(result);
+            console.log(xmlparser.toJson(result));
+            // ctx.request.body = .;
         }
         await next();
     };
