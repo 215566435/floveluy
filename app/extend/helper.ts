@@ -23,7 +23,7 @@ class helper {
         return `<xml> 
         <ToUserName>< ![CDATA[${toUser}] ]></ToUserName> 
         <FromUserName>< ![CDATA[gh_cb7321b27e37] ]></FromUserName> 
-        <CreateTime>12345678</CreateTime> 
+        <CreateTime>${Date.now()}</CreateTime> 
         <MsgType>< ![CDATA[text] ]></MsgType> 
         <Content>< ![CDATA[${msg}] ]></Content> 
         </xml>`
