@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const xmlparser = require("xml2json");
 module.exports = (options) => {
     return async function wechat(ctx, next) {
+        await next();
         if (ctx.request.headers['content-type'] === 'text/xml') {
             let awaitBody = new Promise(function (resolve, reject) {
                 try {
@@ -22,6 +23,5 @@ module.exports = (options) => {
             let json = xmlparser.toJson(result);
             ctx.request.body = JSON.parse(json);
         }
-        await next();
     };
 };
