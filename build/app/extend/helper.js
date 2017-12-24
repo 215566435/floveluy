@@ -20,7 +20,7 @@ class helper {
         return Math.round((parseFloat(spec + '') / 100 * parseFloat(weight))) + '';
     }
     returnWechatMsg(toUser, msg) {
-        return `<xml><ToUserName>< ![CDATA[gh_cb7321b27e37] ]></ToUserName><FromUserName>< ![CDATA[${toUser}] ]></FromUserName><CreateTime>${Date.now()}</CreateTime><MsgType>< ![CDATA[text] ]></MsgType><Content>< ![CDATA[${msg}] ]></Content></xml>`;
+        return `<xml><ToUserName>< ![CDATA[${toUser}] ]></ToUserName><FromUserName>< ![CDATA[gh_cb7321b27e37] ]></FromUserName><CreateTime>${Date.now()}</CreateTime><MsgType>< ![CDATA[text] ]></MsgType><Content>< ![CDATA[${msg}] ]></Content></xml>`;
     }
 }
 exports.default = {
