@@ -18,7 +18,7 @@ class HomeController extends Controller {
 
         this.ctx.body = this.ctx.helper.utils.returnWechatMsg(toUser, msg)
         console.log(this.ctx.body)
-        this.ctx.set('Content-Type', 'text/xml');
+        // this.ctx.set('Content-Type', 'text/xml');
     }
 }
 
