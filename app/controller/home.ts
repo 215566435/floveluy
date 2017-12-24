@@ -3,7 +3,10 @@ import { Controller } from 'egg';
 
 class HomeController extends Controller {
     async index() {
-        console.log(this.ctx.request.body);
+        let xmlbody: { [key: string]: any } = this.ctx.request.body;
+        let toUser = xmlbody['xml']['FromUserName'];
+        let Content = xmlbody['xml']['Content'];
+        console.log({ toUser, Content })
 
         console.log('运行了这里')
         const foodspec = await this.ctx.service.food.calulate(['苹果130', '香蕉130', '雪糕200', '蛋糕150']);
