@@ -4,7 +4,6 @@ import * as xmlparser from 'xml2json';
 
 module.exports = (options: any) => {
     return async function wechat(ctx: Context, next: any) {
-        await next();
         if (ctx.request.headers['content-type'] === 'text/xml') {
             let awaitBody = new Promise(function (resolve, reject) {
                 try {
@@ -24,7 +23,7 @@ module.exports = (options: any) => {
             ctx.request.body = JSON.parse(json);
             console.log(ctx.request.body);
         }
-
+        await next();
     }
 
 }
