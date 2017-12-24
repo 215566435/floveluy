@@ -7,7 +7,6 @@ class DatabaseService extends egg_1.Service {
     constructor(props) {
         super(props);
         if (!instance) {
-            console.log('调用');
             instance = this;
         }
         return instance;
@@ -17,7 +16,6 @@ class DatabaseService extends egg_1.Service {
     }
     init() {
         if (!this.sequelize) {
-            console.log('初始化');
             this.sequelize = new Sequelize(this.getConfig().database, this.getConfig().username, this.getConfig().password, {
                 host: this.getConfig().host,
                 dialect: 'mysql',

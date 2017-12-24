@@ -9,7 +9,6 @@ export default class DatabaseService extends Service {
     constructor(props: any) {
         super(props);
         if (!instance) {
-            console.log('调用');
             instance = this;
         }
         return instance;
@@ -19,7 +18,6 @@ export default class DatabaseService extends Service {
     }
     init() {
         if (!this.sequelize) {
-            console.log('初始化')
             this.sequelize = new Sequelize(
                 this.getConfig().database,
                 this.getConfig().username,

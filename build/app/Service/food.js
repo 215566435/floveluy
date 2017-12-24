@@ -79,7 +79,7 @@ class FoodService extends egg_1.Service {
             return Object.assign({}, foodSpec, { title: title });
         }
         return {
-            title: `我不认识**${keyword}**是啥`,
+            title: `没有-${keyword}-的数据`,
             carbs: '0',
             fat: '0',
             pro: '0',
