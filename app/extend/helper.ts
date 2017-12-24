@@ -20,7 +20,12 @@ class helper {
     }
     returnWechatMsg(toUser: string, msg: string) {
 
-        return `<xml><ToUserName>${toUser}</ToUserName><FromUserName>gh_cb7321b27e37</FromUserName><CreateTime>${Date.now()}</CreateTime><MsgType>< ![CDATA[text] ]></MsgType><Content>< ![CDATA[${msg}] ]></Content></xml>`
+        var xmlContent = "<xml><ToUserName><![CDATA[" + toUser + "]]></ToUserName>";
+        xmlContent += "<FromUserName><![CDATA[" + 'gh_cb7321b27e37' + "]]></FromUserName>";
+        xmlContent += "<CreateTime>" + new Date().getTime() + "</CreateTime>";
+        xmlContent += "<MsgType><![CDATA[text]]></MsgType>";
+        xmlContent += "<Content><![CDATA[" + msg + "]]></Content></xml>";
+        return xmlContent
     }
 }
 
