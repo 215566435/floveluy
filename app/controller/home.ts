@@ -9,7 +9,8 @@ class HomeController extends Controller {
 
         const foodspec = await this.ctx.service.food.calulate(Content.split(" "));
         if (foodspec.single === true && foodspec.notfound === true) {
-            this.ctx.body = this.ctx.helper.utils.getJokerMsg(Content);
+            const joke = this.ctx.helper.utils.getJokerMsg(Content);
+            this.ctx.body = this.ctx.helper.utils.returnWechatMsg(toUser, joke)
         } else {
             const msg = `「${foodspec.title}」\n${foodspec.cal}\n${foodspec.carbs}\n${foodspec.fat}\n${foodspec.pro}`;
             this.ctx.body = this.ctx.helper.utils.returnWechatMsg(toUser, msg)

@@ -8,7 +8,8 @@ class HomeController extends egg_1.Controller {
         let Content = xmlbody['xml']['Content'];
         const foodspec = await this.ctx.service.food.calulate(Content.split(" "));
         if (foodspec.single === true && foodspec.notfound === true) {
-            this.ctx.body = this.ctx.helper.utils.getJokerMsg(Content);
+            const joke = this.ctx.helper.utils.getJokerMsg(Content);
+            this.ctx.body = this.ctx.helper.utils.returnWechatMsg(toUser, joke);
         }
         else {
             const msg = `「${foodspec.title}」\n${foodspec.cal}\n${foodspec.carbs}\n${foodspec.fat}\n${foodspec.pro}`;
