@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const egg_1 = require("egg");
 class HomeController extends egg_1.Controller {
     async index() {
-        console.log(this.ctx.request.body.toString());
+        console.log(this.ctx.request.body);
         console.log('运行了这里');
         const foodspec = await this.ctx.service.food.calulate(['苹果130', '香蕉130', '雪糕200', '蛋糕150']);
         this.ctx.body = `<h5>${foodspec.title}</h5>
