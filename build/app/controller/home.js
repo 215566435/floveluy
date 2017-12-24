@@ -7,14 +7,14 @@ class HomeController extends egg_1.Controller {
         let toUser = xmlbody['xml']['FromUserName'];
         let Content = xmlbody['xml']['Content'];
         console.log({ toUser, Content });
-        console.log('运行了这里');
-        const foodspec = await this.ctx.service.food.calulate(['苹果130', '香蕉130', '雪糕200', '蛋糕150']);
-        this.ctx.body = `<h5>${foodspec.title}</h5>
-        <p>${foodspec.cal}</p>
-        <p>${foodspec.carbs}</p>
-        <p>${foodspec.fat}</p>
-        <p>${foodspec.pro}</p>
+        const foodspec = await this.ctx.service.food.calulate(Content.split(","));
+        const msg = `「${foodspec.title}」
+        ${foodspec.cal}
+        ${foodspec.carbs}
+        ${foodspec.fat}
+        ${foodspec.pro}\n
         注意：如果出现0g的数字，代表这种元素在此类物品里量太少，忽略不计`;
+        this.ctx.body = this.ctx.helper.utils.returnWechatMsg(toUser, msg);
         this.ctx.set('Content-Type', 'text/html;charset=utf-8');
     }
 }
