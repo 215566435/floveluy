@@ -8,13 +8,15 @@ class helper {
         return string.match('[^0-9]+') + '';
     }
     regxNumber(string) {
-        const int = string.match(/\d+(\.\d+)/g);
+        let int = string.match(/\d+(\.\d+)/g);
         if (int === null) {
+            int = string.match(/\d+/g);
+            if (int === null) {
+                return "100";
+            }
             return string.match(/\d+/g) + '';
         }
-        else {
-            return "100";
-        }
+        return '100';
     }
     caculate(spec, weight) {
         return Math.round((parseFloat(spec + '') / 100 * parseFloat(weight))) + '';
