@@ -22,6 +22,7 @@ module.exports = (options) => {
             let result = await awaitBody;
             let json = xmlparser.toJson(result);
             ctx.request.body = JSON.parse(json);
+            console.log(ctx.request.body);
         }
     };
 };
