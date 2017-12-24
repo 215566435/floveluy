@@ -11,7 +11,7 @@ class HomeController extends egg_1.Controller {
             this.ctx.body = this.ctx.helper.utils.getJokerMsg(Content);
         }
         else {
-            const msg = `「${foodspec.title}」\n${foodspec.cal}\n${foodspec.carbs}\n${foodspec.fat}\n${foodspec.pro}\n\n注意：如果出现0g的数字，代表这种元素在此类物品里量太少，忽略不计`;
+            const msg = `「${foodspec.title}」\n${foodspec.cal}\n${foodspec.carbs}\n${foodspec.fat}\n${foodspec.pro}`;
             this.ctx.body = this.ctx.helper.utils.returnWechatMsg(toUser, msg);
         }
         this.ctx.set('Content-Type', 'text/plain; charset=utf-8');

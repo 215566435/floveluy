@@ -54,7 +54,8 @@ class FoodService extends egg_1.Service {
                 fat: this.ctx.helper.utils.caculate(spec.fat, weight),
                 pro: this.ctx.helper.utils.caculate(spec.pro, weight),
                 cal: this.ctx.helper.utils.caculate(spec.cal, weight),
-                weight: weight
+                weight: weight,
+                notfound: spec.notfound
             };
         };
         const promises = foods.map(calulateEach);

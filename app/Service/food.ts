@@ -33,7 +33,6 @@ export default class FoodService extends Service {
     async calulate(foods: string[]): Promise<FoodSpec> {
         const isSingleOne = foods.length === 1 ? true : false;
 
-
         const specs = await this.getFoodBundle(foods);
         var title = '';
         var totalCarbs = 0;
@@ -71,7 +70,8 @@ export default class FoodService extends Service {
                 fat: this.ctx.helper.utils.caculate(spec.fat, weight),
                 pro: this.ctx.helper.utils.caculate(spec.pro, weight),
                 cal: this.ctx.helper.utils.caculate(spec.cal, weight),
-                weight: weight
+                weight: weight,
+                notfound: spec.notfound
             }
         }
 
