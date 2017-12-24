@@ -8,7 +8,9 @@ export interface FoodSpec {
     fat: string | undefined,
     pro: string | undefined,
     cal: string | undefined,
-    weight?: string | undefined
+    weight?: string | undefined,
+    notfound?: boolean,
+    single?: boolean
 }
 
 export default class FoodService extends Service {
@@ -29,6 +31,9 @@ export default class FoodService extends Service {
     }
 
     async calulate(foods: string[]): Promise<FoodSpec> {
+        const isSingleOne = foods.length === 1 ? true : false;
+
+
         const specs = await this.getFoodBundle(foods);
         var title = '';
         var totalCarbs = 0;
@@ -49,7 +54,9 @@ export default class FoodService extends Service {
             carbs: '碳水化合物：' + totalCarbs + 'g',
             fat: '脂肪：' + totalFats + 'g',
             pro: '蛋白质：' + totalPros + 'g',
-            cal: '总热量：' + totalCal + '大卡'
+            cal: '总热量：' + totalCal + '大卡',
+            single: isSingleOne,
+            notfound: specs[0].notfound
         }
     }
 
@@ -97,7 +104,8 @@ export default class FoodService extends Service {
             carbs: '0',
             fat: '0',
             pro: '0',
-            cal: '0'
+            cal: '0',
+            notfound: true
         };
     }
 

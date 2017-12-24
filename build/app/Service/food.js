@@ -18,6 +18,7 @@ class FoodService extends egg_1.Service {
         });
     }
     async calulate(foods) {
+        const isSingleOne = foods.length === 1 ? true : false;
         const specs = await this.getFoodBundle(foods);
         var title = '';
         var totalCarbs = 0;
@@ -37,7 +38,9 @@ class FoodService extends egg_1.Service {
             carbs: '碳水化合物：' + totalCarbs + 'g',
             fat: '脂肪：' + totalFats + 'g',
             pro: '蛋白质：' + totalPros + 'g',
-            cal: '总热量：' + totalCal + '大卡'
+            cal: '总热量：' + totalCal + '大卡',
+            single: isSingleOne,
+            notfound: specs[0].notfound
         };
     }
     async getFoodBundle(foods) {
@@ -79,7 +82,8 @@ class FoodService extends egg_1.Service {
             carbs: '0',
             fat: '0',
             pro: '0',
-            cal: '0'
+            cal: '0',
+            notfound: true
         };
     }
     async _getFood(herf) {
