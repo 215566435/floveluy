@@ -43,7 +43,7 @@ class FoodService extends egg_1.Service {
     async getFoodBundle(foods) {
         const calulateEach = async (food) => {
             const name = this.ctx.helper.utils.regxChinese(food);
-            const weight = this.ctx.helper.utils.regxNumber(food);
+            const weight = this.ctx.helper.utils.regxNumber(food) || "100";
             const spec = await this.getSingleFood(name + '');
             return {
                 title: spec.title,

@@ -56,7 +56,7 @@ export default class FoodService extends Service {
     async getFoodBundle(foods: string[]): Promise<FoodSpec[]> {
         const calulateEach = async (food: string): Promise<FoodSpec> => {
             const name = this.ctx.helper.utils.regxChinese(food);
-            const weight = this.ctx.helper.utils.regxNumber(food);
+            const weight = this.ctx.helper.utils.regxNumber(food) || "100";
             const spec = await this.getSingleFood(name + '');
             return {
                 title: spec.title,
