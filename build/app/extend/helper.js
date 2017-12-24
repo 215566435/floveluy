@@ -13,7 +13,7 @@ class helper {
             return string.match(/\d+/g) + '';
         }
         else {
-            return int + '';
+            return "100";
         }
     }
     caculate(spec, weight) {

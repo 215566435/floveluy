@@ -12,7 +12,7 @@ class helper {
         if (int === null) {
             return string.match(/\d+/g) + '';
         } else {
-            return int + ''
+            return "100"
         }
     }
     caculate(spec: string | undefined, weight: string): string {
