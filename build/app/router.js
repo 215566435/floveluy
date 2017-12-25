@@ -2,5 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 module.exports = (app) => {
     const { router, controller } = app;
-    router.post('homepage', '/', controller.home.index);
+    router.post('homepage', '/', controller.foolcal.index);
+    router.get('/inskeeper', controller.inskeeper.index);
 };

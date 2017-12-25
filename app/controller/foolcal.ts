@@ -1,7 +1,7 @@
 import { Controller } from 'egg';
 
 
-class HomeController extends Controller {
+class FoolCalController extends Controller {
     async index() {
         let xmlbody: { [key: string]: any } = this.ctx.request.body;
         let toUser = xmlbody['xml']['FromUserName'];
@@ -22,8 +22,9 @@ class HomeController extends Controller {
 
 declare module 'egg' {
     export interface IController {
-        home: HomeController;
+        foolcal: FoolCalController;
+
     }
 }
 
-module.exports = HomeController;
+module.exports = FoolCalController;
