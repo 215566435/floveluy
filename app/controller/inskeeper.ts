@@ -16,6 +16,7 @@ export default class InsKeeperController extends Controller {
             }
         });
         this.ctx.body = this.ctx.helper.utils.returnWechatMsg(toUser, urlBundles);
+
         this.ctx.set('Content-Type', 'text/html; charset=utf-8');
     }
 }
