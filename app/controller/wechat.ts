@@ -8,9 +8,10 @@ enum MessageType {
 class WechatController extends Controller {
     async index() {
         if (this.getMessageType() === MessageType.INS) {
-            await this.food();
-        } else {
             await this.inskeeper();
+
+        } else {
+            await this.food();
         }
     }
 
@@ -61,7 +62,7 @@ class WechatController extends Controller {
         var Content: string = xmlbody['xml']['Content'];
         const split = Content.split('/');
         for (let i in split) {
-            if (INS[split[i]]) {
+            if (INS[split[i]] === 1) {
                 return MessageType.INS;
             }
         }

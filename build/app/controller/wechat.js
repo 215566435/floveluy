@@ -9,10 +9,10 @@ var MessageType;
 class WechatController extends egg_1.Controller {
     async index() {
         if (this.getMessageType() === MessageType.INS) {
-            await this.food();
+            await this.inskeeper();
         }
         else {
-            await this.inskeeper();
+            await this.food();
         }
     }
     async food() {
@@ -58,7 +58,7 @@ class WechatController extends egg_1.Controller {
         var Content = xmlbody['xml']['Content'];
         const split = Content.split('/');
         for (let i in split) {
-            if (INS[split[i]]) {
+            if (INS[split[i]] === 1) {
                 return MessageType.INS;
             }
         }
