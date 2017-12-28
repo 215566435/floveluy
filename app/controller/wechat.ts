@@ -8,10 +8,45 @@ enum MessageType {
 class WechatController extends Controller {
     async index() {
         if (this.getMessageType() === MessageType.INS) {
-            await this.app.controller.inskeeper.index();
+            await this.food();
         } else {
-            await this.app.controller.foolcal.index();
+            await this.inskeeper();
         }
+    }
+
+    async food() {
+        let xmlbody: { [key: string]: any } = this.ctx.request.body;
+        let toUser = xmlbody['xml']['FromUserName'];
+        let Content: string = xmlbody['xml']['Content'];
+
+        const foodspec = await this.ctx.service.food.calulate(Content.split(" "));
+        if (foodspec.single === true && foodspec.notfound === true) {
+            const joke = this.ctx.helper.utils.getJokerMsg(Content);
+            this.ctx.body = this.ctx.helper.utils.returnWechatMsg(toUser, joke)
+        } else {
+            const msg = `「${foodspec.title}」\n${foodspec.cal}\n${foodspec.carbs}\n${foodspec.fat}\n${foodspec.pro}`;
+            this.ctx.body = this.ctx.helper.utils.returnWechatMsg(toUser, msg)
+        }
+
+        this.ctx.set('Content-Type', 'text/plain; charset=utf-8');
+    }
+
+    async inskeeper() {
+        let xmlbody: { [key: string]: any } = this.ctx.request.body;
+        let toUser = xmlbody['xml']['FromUserName'];
+        let Content: string = xmlbody['xml']['Content'];
+
+        const urls = await this.ctx.service.inskeeper.fetchIns(Content);
+        const urlBundles = urls.reduce((pre, next, index) => {
+            if (index === 1) {
+                return `<img src="${pre}"/>` + `<img src="${next}"/>`
+            } else {
+                return pre + `<img src="${next}"/>`
+            }
+        });
+        this.ctx.body = this.ctx.helper.utils.returnWechatMsg(toUser, urlBundles);
+
+        this.ctx.set('Content-Type', 'text/html; charset=utf-8');
     }
 
     getMessageType(): MessageType {
