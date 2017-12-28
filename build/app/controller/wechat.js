@@ -9,10 +9,10 @@ var MessageType;
 class WechatController extends egg_1.Controller {
     async index() {
         if (this.getMessageType() === MessageType.INS) {
-            this.app.controller.inskeeper.index();
+            await this.app.controller.inskeeper.index();
         }
         else {
-            this.app.controller.foolcal.index();
+            await this.app.controller.foolcal.index();
         }
     }
     getMessageType() {

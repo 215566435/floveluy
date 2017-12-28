@@ -8,9 +8,9 @@ enum MessageType {
 class WechatController extends Controller {
     async index() {
         if (this.getMessageType() === MessageType.INS) {
-            this.app.controller.inskeeper.index();
+            await this.app.controller.inskeeper.index();
         } else {
-            this.app.controller.foolcal.index();
+            await this.app.controller.foolcal.index();
         }
     }
 
