@@ -17,5 +17,13 @@ exports.default = (appInfo) => {
             enable: false,
         }
     };
+    config.sequelize = {
+        dialect: "mysql",
+        database: 'trainnote',
+        host: "localhost",
+        port: "3306",
+        username: "root",
+        password: "metal_gear2"
+    };
     return Object.assign({}, config, DefaultConfig_1.default);
 };

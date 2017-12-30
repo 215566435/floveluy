@@ -16,25 +16,21 @@ class WechatController extends egg_1.Controller {
         }
     }
     async food() {
-        let xmlbody = this.ctx.request.body;
-        let toUser = xmlbody['xml']['FromUserName'];
-        let Content = xmlbody['xml']['Content'];
-        const foodspec = await this.ctx.service.food.calulate(Content.split(" "));
+        const info = this.postInfo();
+        const foodspec = await this.ctx.service.food.calulate(info.Content.split(" "));
         if (foodspec.single === true && foodspec.notfound === true) {
-            const joke = this.ctx.helper.utils.getJokerMsg(Content);
-            this.ctx.body = this.ctx.helper.utils.returnWechatMsg(toUser, joke);
+            const joke = this.ctx.helper.utils.getJokerMsg(info.Content);
+            this.ctx.body = this.ctx.helper.utils.returnWechatMsg(info.toUser, joke);
         }
         else {
             const msg = `「${foodspec.title}」\n${foodspec.cal}\n${foodspec.carbs}\n${foodspec.fat}\n${foodspec.pro}`;
-            this.ctx.body = this.ctx.helper.utils.returnWechatMsg(toUser, msg);
+            this.ctx.body = this.ctx.helper.utils.returnWechatMsg(info.toUser, msg);
         }
         this.ctx.set('Content-Type', 'text/plain; charset=utf-8');
     }
     async inskeeper() {
-        let xmlbody = this.ctx.request.body;
-        let toUser = xmlbody['xml']['FromUserName'];
-        let Content = xmlbody['xml']['Content'];
-        const urls = await this.ctx.service.inskeeper.fetchIns(Content);
+        const info = this.postInfo();
+        const urls = await this.ctx.service.inskeeper.fetchIns(info.Content);
         const urlBundles = urls.reduce((pre, next, index) => {
             if (index === 1) {
                 return `<img src="${pre}"/>` + `<img src="${next}"/>`;
@@ -43,7 +39,7 @@ class WechatController extends egg_1.Controller {
                 return pre + `<img src="${next}"/>`;
             }
         });
-        this.ctx.body = this.ctx.helper.utils.returnWechatMsg(toUser, urlBundles);
+        this.ctx.body = this.ctx.helper.utils.returnWechatMsg(info.toUser, urlBundles);
         this.ctx.set('Content-Type', 'text/html; charset=utf-8');
     }
     getMessageType() {
@@ -63,6 +59,15 @@ class WechatController extends egg_1.Controller {
             }
         }
         return MessageType.CHECK_CAL;
+    }
+    postInfo() {
+        const xmlbody = this.ctx.request.body;
+        const toUser = xmlbody['xml']['FromUserName'];
+        const Content = xmlbody['xml']['Content'];
+        return {
+            toUser,
+            Content
+        };
     }
 }
 module.exports = WechatController;

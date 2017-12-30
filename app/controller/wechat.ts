@@ -4,40 +4,38 @@ enum MessageType {
     CHECK_CAL = 1,
     INS
 }
+interface WechatMessageInfo {
+    toUser: string,
+    Content: string
+}
 
 class WechatController extends Controller {
     async index() {
         if (this.getMessageType() === MessageType.INS) {
             await this.inskeeper();
-
         } else {
             await this.food();
         }
     }
 
     async food() {
-        let xmlbody: { [key: string]: any } = this.ctx.request.body;
-        let toUser = xmlbody['xml']['FromUserName'];
-        let Content: string = xmlbody['xml']['Content'];
+        const info = this.postInfo();
+        const foodspec = await this.ctx.service.food.calulate(info.Content.split(" "));
 
-        const foodspec = await this.ctx.service.food.calulate(Content.split(" "));
         if (foodspec.single === true && foodspec.notfound === true) {
-            const joke = this.ctx.helper.utils.getJokerMsg(Content);
-            this.ctx.body = this.ctx.helper.utils.returnWechatMsg(toUser, joke)
+            const joke = this.ctx.helper.utils.getJokerMsg(info.Content);
+            this.ctx.body = this.ctx.helper.utils.returnWechatMsg(info.toUser, joke);
         } else {
             const msg = `「${foodspec.title}」\n${foodspec.cal}\n${foodspec.carbs}\n${foodspec.fat}\n${foodspec.pro}`;
-            this.ctx.body = this.ctx.helper.utils.returnWechatMsg(toUser, msg)
+            this.ctx.body = this.ctx.helper.utils.returnWechatMsg(info.toUser, msg);
         }
-
         this.ctx.set('Content-Type', 'text/plain; charset=utf-8');
     }
 
     async inskeeper() {
-        let xmlbody: { [key: string]: any } = this.ctx.request.body;
-        let toUser = xmlbody['xml']['FromUserName'];
-        let Content: string = xmlbody['xml']['Content'];
+        const info = this.postInfo();
 
-        const urls = await this.ctx.service.inskeeper.fetchIns(Content);
+        const urls = await this.ctx.service.inskeeper.fetchIns(info.Content);
         const urlBundles = urls.reduce((pre, next, index) => {
             if (index === 1) {
                 return `<img src="${pre}"/>` + `<img src="${next}"/>`
@@ -45,7 +43,7 @@ class WechatController extends Controller {
                 return pre + `<img src="${next}"/>`
             }
         });
-        this.ctx.body = this.ctx.helper.utils.returnWechatMsg(toUser, urlBundles);
+        this.ctx.body = this.ctx.helper.utils.returnWechatMsg(info.toUser, urlBundles);
 
         this.ctx.set('Content-Type', 'text/html; charset=utf-8');
     }
@@ -67,6 +65,16 @@ class WechatController extends Controller {
             }
         }
         return MessageType.CHECK_CAL;
+    }
+
+    postInfo(): WechatMessageInfo {
+        const xmlbody: { [key: string]: any } = this.ctx.request.body;
+        const toUser = xmlbody['xml']['FromUserName'];
+        const Content: string = xmlbody['xml']['Content'];
+        return {
+            toUser,
+            Content
+        }
     }
 }
 

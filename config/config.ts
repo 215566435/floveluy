@@ -18,5 +18,15 @@ export default (appInfo: EggAppConfig) => {
             enable: false,
         }
     };
+
+    config.sequelize = { // egg-sequelize 配置
+        dialect: "mysql", // db type
+        database: 'trainnote',
+        host: "localhost",
+        port: "3306",
+        username: "root",
+        password: "metal_gear2"
+    };
+
     return { ...config, ...defaultConfig };
 };
