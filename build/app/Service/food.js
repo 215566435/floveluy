@@ -75,7 +75,8 @@ class FoodService extends egg_1.Service {
             const title = parsedDoc[0].attribs['title'];
             const herf = parsedDoc[0].attribs['href'];
             const foodSpec = await this._getFood(herf);
-            await this.ctx.service.database.temp_insert(Object.assign({}, foodSpec, { title: title }), keyword);
+            await this.FoodInsert(Object.assign({}, foodSpec, { title: title }), keyword);
+            // await this.ctx.service.database.temp_insert({ ...foodSpec, title: title }, keyword);
             return Object.assign({}, foodSpec, { title: title });
         }
         return {
@@ -141,6 +142,21 @@ class FoodService extends egg_1.Service {
             this.app.logger.error(e);
         }
         return null;
+    }
+    async FoodInsert(specs, sname) {
+        const food = this.ctx.model.Food;
+        // this.sequelize.sync({
+        //     force: true
+        // });
+        await food.create({
+            id: Date.now(),
+            sname: sname,
+            fullname: specs.title,
+            cal: specs.cal,
+            pro: specs.pro,
+            carb: specs.carbs,
+            fat: specs.fat
+        });
     }
 }
 exports.default = FoodService;

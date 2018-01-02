@@ -95,7 +95,8 @@ export default class FoodService extends Service {
             const title = parsedDoc[0].attribs['title'];
             const herf = parsedDoc[0].attribs['href'];
             const foodSpec = await this._getFood(herf);
-            await this.ctx.service.database.temp_insert({ ...foodSpec, title: title }, keyword);
+            await this.FoodInsert({ ...foodSpec, title: title }, keyword);
+            // await this.ctx.service.database.temp_insert({ ...foodSpec, title: title }, keyword);
 
             return { ...foodSpec, title: title };
         }
@@ -166,6 +167,21 @@ export default class FoodService extends Service {
         }
 
         return null
+    }
+    async FoodInsert(specs: FoodSpec, sname: string) {
+        const food: Model<{}, {}> = this.ctx.model.Food;
+        // this.sequelize.sync({
+        //     force: true
+        // });
+        await food.create({
+            id: Date.now(),
+            sname: sname,
+            fullname: specs.title,
+            cal: specs.cal,
+            pro: specs.pro,
+            carb: specs.carbs,
+            fat: specs.fat
+        })
     }
 }
 
