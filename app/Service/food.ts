@@ -1,6 +1,6 @@
 import { Service } from "egg";
 import * as cheerio from 'cheerio';
-// import * as sequelize from 'sequelize';
+import { Model } from 'sequelize';
 
 export interface FoodSpec {
     title: string | undefined,
@@ -81,7 +81,8 @@ export default class FoodService extends Service {
     }
 
     async getSingleFood(keyword: string): Promise<FoodSpec> {
-        const res = await this.ctx.service.database.checkfood(keyword);
+        const res = await this.checkfood(keyword);
+
         if (res) {
             return res
         }
@@ -140,6 +141,31 @@ export default class FoodService extends Service {
             }
         })
         return foodSpec;
+    }
+
+    async checkfood(sname: string): Promise<FoodSpec | null> {
+        try {
+            const food: Model<{}, {}> = this.ctx.model.Food;
+            const result = await food.findAll({
+                where: {
+                    sname: sname
+                }
+            })
+            if (result.length === 1) {
+                const res: { [string: string]: any } = result[0];
+                return {
+                    title: res['fullname'],
+                    carbs: res['carb'],
+                    cal: res['cal'],
+                    pro: res['pro'],
+                    fat: res['fat']
+                }
+            }
+        } catch (e) {
+            this.app.logger.error(e);
+        }
+
+        return null
     }
 }
 

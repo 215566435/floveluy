@@ -9,7 +9,6 @@ class TrainNoteController extends Controller {
         //         yield app.model.sync({ force: true });
         //     });
         // }
-
         const Food: Model<{}, {}> = this.ctx.model.Food;
     }
 

@@ -19,17 +19,21 @@ class WechatController extends Controller {
     }
 
     async food() {
-        const info = this.postInfo();
-        const foodspec = await this.ctx.service.food.calulate(info.Content.split(" "));
+        try {
+            const info = this.postInfo();
+            const foodspec = await this.ctx.service.food.calulate(info.Content.split(" "));
 
-        if (foodspec.single === true && foodspec.notfound === true) {
-            const joke = this.ctx.helper.utils.getJokerMsg(info.Content);
-            this.ctx.body = this.ctx.helper.utils.returnWechatMsg(info.toUser, joke);
-        } else {
-            const msg = `「${foodspec.title}」\n${foodspec.cal}\n${foodspec.carbs}\n${foodspec.fat}\n${foodspec.pro}`;
-            this.ctx.body = this.ctx.helper.utils.returnWechatMsg(info.toUser, msg);
+            if (foodspec.single === true && foodspec.notfound === true) {
+                const joke = this.ctx.helper.utils.getJokerMsg(info.Content);
+                this.ctx.body = this.ctx.helper.utils.returnWechatMsg(info.toUser, joke);
+            } else {
+                const msg = `「${foodspec.title}」\n${foodspec.cal}\n${foodspec.carbs}\n${foodspec.fat}\n${foodspec.pro}`;
+                this.ctx.body = this.ctx.helper.utils.returnWechatMsg(info.toUser, msg);
+            }
+            this.ctx.set('Content-Type', 'text/plain; charset=utf-8');
+        } catch (e) {
+            this.app.logger.error(e);
         }
-        this.ctx.set('Content-Type', 'text/plain; charset=utf-8');
     }
 
     async inskeeper() {

@@ -63,7 +63,7 @@ class FoodService extends egg_1.Service {
         return specs;
     }
     async getSingleFood(keyword) {
-        const res = await this.ctx.service.database.checkfood(keyword);
+        const res = await this.checkfood(keyword);
         if (res) {
             return res;
         }
@@ -117,6 +117,30 @@ class FoodService extends egg_1.Service {
             }
         });
         return foodSpec;
+    }
+    async checkfood(sname) {
+        try {
+            const food = this.ctx.model.Food;
+            const result = await food.findAll({
+                where: {
+                    sname: sname
+                }
+            });
+            if (result.length === 1) {
+                const res = result[0];
+                return {
+                    title: res['fullname'],
+                    carbs: res['carb'],
+                    cal: res['cal'],
+                    pro: res['pro'],
+                    fat: res['fat']
+                };
+            }
+        }
+        catch (e) {
+            this.app.logger.error(e);
+        }
+        return null;
     }
 }
 exports.default = FoodService;
