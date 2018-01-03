@@ -76,7 +76,6 @@ class FoodService extends egg_1.Service {
             const herf = parsedDoc[0].attribs['href'];
             const foodSpec = await this._getFood(herf);
             await this.FoodInsert(Object.assign({}, foodSpec, { title: title }), keyword);
-            // await this.ctx.service.database.temp_insert({ ...foodSpec, title: title }, keyword);
             return Object.assign({}, foodSpec, { title: title });
         }
         return {

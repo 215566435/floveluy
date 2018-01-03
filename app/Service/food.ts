@@ -96,7 +96,6 @@ export default class FoodService extends Service {
             const herf = parsedDoc[0].attribs['href'];
             const foodSpec = await this._getFood(herf);
             await this.FoodInsert({ ...foodSpec, title: title }, keyword);
-            // await this.ctx.service.database.temp_insert({ ...foodSpec, title: title }, keyword);
 
             return { ...foodSpec, title: title };
         }
