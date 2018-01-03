@@ -4,7 +4,7 @@ import { ModelDefine } from './ModelDefine';
 
 
 module.exports = (app: Application) => {
-    const { STRING, INTEGER } = app.Sequelize;
+    const { STRING, INTEGER, BIGINT } = app.Sequelize;
 
     const days = ModelDefine(app, 'days', {
         title: STRING(128),
@@ -13,9 +13,9 @@ module.exports = (app: Application) => {
             type: STRING(128),
             allowNull: true
         },
-        plan_id: {
+        planID: {
             type: INTEGER,
-            allowNull: false
+            unique: true
         },
         days_id: {
             type: INTEGER,

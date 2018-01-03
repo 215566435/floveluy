@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const ModelDefine_1 = require("./ModelDefine");
 module.exports = (app) => {
-    const { STRING, INTEGER } = app.Sequelize;
+    const { STRING, INTEGER, BIGINT } = app.Sequelize;
     const days = ModelDefine_1.ModelDefine(app, 'days', {
         title: STRING(128),
         bodypart: INTEGER,
@@ -10,9 +10,9 @@ module.exports = (app) => {
             type: STRING(128),
             allowNull: true
         },
-        plan_id: {
+        planID: {
             type: INTEGER,
-            allowNull: false
+            unique: true
         },
         days_id: {
             type: INTEGER,

@@ -2,11 +2,13 @@ import { Application } from 'egg';
 import { DefineAttributes } from 'sequelize';
 
 export const ModelDefine = (app: Application, name: string, attributes: DefineAttributes) => {
-    const { BIGINT } = app.Sequelize;
+    const { BIGINT, INTEGER } = app.Sequelize;
     const Model = app.model.define(name, {
         id: {
-            type: BIGINT,
-            primaryKey: true
+            type: INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+            unique: true,
         },
         ...attributes
     }, {
