@@ -2,6 +2,17 @@ import { Controller } from 'egg';
 import { Model } from 'sequelize';
 
 class TrainNoteController extends Controller {
+    async index() {
+        //查询计划
+        this.ctx.response.body = `你来到index`;
+    }
+    async show() {
+        //查询计划
+        // console.log(this.ctx.params['id'])
+        this.ctx.response.body = `你输入的地址是：${this.ctx.params['id']}`;
+    }
+
+
     async plan() {
         const app = this.app;
         if (app.config.env === 'local') {
