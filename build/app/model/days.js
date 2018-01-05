@@ -5,6 +5,7 @@ module.exports = (app) => {
     const { STRING, INTEGER, BIGINT } = app.Sequelize;
     const days = ModelDefine_1.ModelDefine(app, 'days', {
         title: STRING(128),
+        day: INTEGER,
         bodypart: INTEGER,
         surface: {
             type: STRING(128),

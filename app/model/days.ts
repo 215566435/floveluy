@@ -8,6 +8,7 @@ module.exports = (app: Application) => {
 
     const days = ModelDefine(app, 'days', {
         title: STRING(128),
+        day: INTEGER,
         bodypart: INTEGER,
         surface: {
             type: STRING(128),
