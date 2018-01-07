@@ -11,11 +11,7 @@ module.exports = (app: Application) => {
         title: STRING(20),
         sub_title: STRING(128),
         author: STRING(40),
-        time: BIGINT,
-        planID: {
-            type: INTEGER,
-            unique: true,
-        }
+        time: BIGINT
     });
 
     return plan;

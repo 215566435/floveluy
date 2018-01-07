@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const basecontroller_1 = require("../base/basecontroller");
-class TrainNoteController extends basecontroller_1.BaseController {
+class PlanController extends basecontroller_1.BaseController {
     async show() {
         //查询计划
         this.ctx.response.body = `你输入的地址是：${this.ctx.params['id']}`;
@@ -26,6 +26,12 @@ class TrainNoteController extends basecontroller_1.BaseController {
             this.Fail('没有相应的计划');
         }
     }
+    async createPlan() {
+        this.ctx.validate({
+            title: { type: 'string' }
+        });
+        // this.ctx.
+    }
     async tmp_insert() {
         const plan = this.ctx.model.Plan;
         const days = this.ctx.model.Days;
@@ -35,7 +41,6 @@ class TrainNoteController extends basecontroller_1.BaseController {
             sub_title: '快速、科学、有策略性的减脂攻略',
             author: '方正',
             time: Date.now(),
-            planID: 25
         });
         await days.create({
             day: 1,
@@ -95,4 +100,4 @@ class TrainNoteController extends basecontroller_1.BaseController {
         });
     }
 }
-module.exports = TrainNoteController;
+module.exports = PlanController;

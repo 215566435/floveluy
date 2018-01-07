@@ -5,6 +5,16 @@ class PlanService extends egg_1.Service {
     constructor(props) {
         super(props);
     }
+    async createPlan(postPlan) {
+        const plan = this.ctx.model.Plan;
+        await plan.create({
+            title: postPlan.title,
+            sub_title: postPlan.sub_title,
+            author: postPlan.author,
+            time: Date.now(),
+        });
+        return await plan.count();
+    }
     async getPlan() {
         const plan = this.ctx.model.Plan;
         const days = this.ctx.model.Days;
@@ -17,19 +27,18 @@ class PlanService extends egg_1.Service {
                 }]
         });
         if (planData) {
-            const days = this.getDays(planData['days']);
-            console.log(days);
+            const days = this.parseDays(planData['days']);
             return {
                 title: planData['title'],
                 sub_title: planData['sub_title'],
                 author: planData['author'],
-                planID: planData['planID'],
+                Id: planData['id'],
                 days: days
             };
         }
         return null;
     }
-    getDays(days) {
+    parseDays(days) {
         if (days) {
             return days.map((day) => {
                 return {

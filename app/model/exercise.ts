@@ -18,7 +18,7 @@ module.exports = (app: Application) => {
             allowNull: false
         },
         detail: app.Sequelize.JSON,
-        days_id: {
+        daysID: {
             type: INTEGER,
             allowNull: false
         }

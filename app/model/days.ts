@@ -16,7 +16,6 @@ module.exports = (app: Application) => {
         },
         planID: {
             type: INTEGER,
-            unique: true
         },
         days_id: {
             type: INTEGER,
