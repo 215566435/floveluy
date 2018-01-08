@@ -6,8 +6,8 @@ export interface PlanModel {
     title: string
     sub_title: string
     author: string
-    Id: number,
-    days: DayModel[] | null
+    Id?: number,
+    days?: DayModel[] | null,
 }
 
 export interface DayModel {
@@ -23,7 +23,7 @@ export default class PlanService extends Service {
         super(props);
 
     }
-    async createPlan(postPlan: PlanModel): Promise<number> {
+    async createPlan(postPlan: PlanModel): Promise<{ id: number }> {
         const plan: Model<{}, {}> = this.ctx.model.Plan;
 
         await plan.create({
@@ -32,8 +32,24 @@ export default class PlanService extends Service {
             author: postPlan.author,
             time: Date.now(),
         })
+        const id = await plan.count();
 
-        return await plan.count();
+        return {
+            id: id
+        }
+    }
+
+    async addDays(DayModel: DayModel) {
+        const days: Model<{}, {}> = this.ctx.model.Days;
+
+        await days.create({
+            day: DayModel.day,
+            title: DayModel.title,
+            bodypart: DayModel.bodypart,
+            surface: DayModel.surface,
+            days_id: 123,
+            planID: DayModel.planID
+        })
     }
 
     async getPlan(): Promise<PlanModel | null> {

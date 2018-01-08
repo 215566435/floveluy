@@ -13,7 +13,21 @@ class PlanService extends egg_1.Service {
             author: postPlan.author,
             time: Date.now(),
         });
-        return await plan.count();
+        const id = await plan.count();
+        return {
+            id: id
+        };
+    }
+    async addDays(DayModel) {
+        const days = this.ctx.model.Days;
+        await days.create({
+            day: DayModel.day,
+            title: DayModel.title,
+            bodypart: DayModel.bodypart,
+            surface: DayModel.surface,
+            days_id: 123,
+            planID: DayModel.planID
+        });
     }
     async getPlan() {
         const plan = this.ctx.model.Plan;

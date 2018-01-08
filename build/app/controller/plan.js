@@ -2,10 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const basecontroller_1 = require("../base/basecontroller");
 class PlanController extends basecontroller_1.BaseController {
-    async show() {
-        //查询计划
-        this.ctx.response.body = `你输入的地址是：${this.ctx.params['id']}`;
-    }
+    // async show() {
+    //     //查询计划
+    //     this.ctx.response.body = `你输入的地址是：${this.ctx.params['id']}`;
+    // }
     async dev_init() {
         const app = this.app;
         if (app.config.env === 'local') {
@@ -26,11 +26,32 @@ class PlanController extends basecontroller_1.BaseController {
             this.Fail('没有相应的计划');
         }
     }
-    async createPlan() {
+    async create() {
+        try {
+            this.ctx.validate({
+                title: { type: 'string' },
+                sub_title: { type: 'string' },
+                author: { type: 'string' }
+            });
+            const PlanModel = this.ctx.request.body;
+            const res = await this.service.plan.createPlan(PlanModel);
+            this.Success({
+                id: res.id
+            });
+            //curl -H "Content-Type: application/json" -X POST --data '{"title":"1","sub_title":"123","author":"123"}' http://127.0.0.1:7001/trainnote/plan/
+        }
+        catch (e) {
+            this.Fail(e);
+        }
+    }
+    async addDay() {
         this.ctx.validate({
-            title: { type: 'string' }
+            day: { type: 'number' },
+            title: { type: 'string' },
+            bodypart: { type: 'number' },
+            surface: { type: 'string' },
+            planID: { type: 'number' }
         });
-        // this.ctx.
     }
     async tmp_insert() {
         const plan = this.ctx.model.Plan;

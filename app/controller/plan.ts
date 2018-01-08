@@ -1,12 +1,13 @@
 import { Controller } from 'egg';
 import { Model } from 'sequelize';
 import { BaseController } from '../base/basecontroller';
+import { PlanModel } from '../service/plan';
 
 class PlanController extends BaseController {
-    async show() {
-        //查询计划
-        this.ctx.response.body = `你输入的地址是：${this.ctx.params['id']}`;
-    }
+    // async show() {
+    //     //查询计划
+    //     this.ctx.response.body = `你输入的地址是：${this.ctx.params['id']}`;
+    // }
 
     async dev_init() {
         const app = this.app;
@@ -33,13 +34,34 @@ class PlanController extends BaseController {
             this.Fail('没有相应的计划');
         }
     }
-    async createPlan() {
-        this.ctx.validate({
-            title: { type: 'string' }
-        })
-        // this.ctx.
+    async create() {
+        try {
+            this.ctx.validate({
+                title: { type: 'string' },
+                sub_title: { type: 'string' },
+                author: { type: 'string' }
+            })
+
+            const PlanModel = <PlanModel>this.ctx.request.body;
+            const res = await this.service.plan.createPlan(PlanModel);
+            this.Success({
+                id: res.id
+            });
+            //curl -H "Content-Type: application/json" -X POST --data '{"title":"1","sub_title":"123","author":"123"}' http://127.0.0.1:7001/trainnote/plan/
+        } catch (e) {
+            this.Fail(e);
+        }
     }
 
+    async addDay() {
+        this.ctx.validate({
+            day: { type: 'number' },
+            title: { type: 'string' },
+            bodypart: { type: 'number' },
+            surface: { type: 'string' },
+            planID: { type: 'number' }
+        })
+    }
 
     async tmp_insert() {
         const plan: Model<{}, {}> = this.ctx.model.Plan;
