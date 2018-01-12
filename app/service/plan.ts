@@ -18,10 +18,11 @@ export interface DayModel {
     planID: number
 }
 
+var DATE_UNIQUE_ID = Date.now();
+
 export default class PlanService extends Service {
     constructor(props: any) {
         super(props);
-
     }
     async createPlan(postPlan: PlanModel): Promise<{ id: number }> {
         const plan: Model<{}, {}> = this.ctx.model.Plan;
@@ -39,17 +40,19 @@ export default class PlanService extends Service {
         }
     }
 
-    async addDays(DayModel: DayModel) {
+    async addDays(DayModel: DayModel): Promise<number> {
         const days: Model<{}, {}> = this.ctx.model.Days;
+        const days_id = DATE_UNIQUE_ID + DayModel.day + DayModel.planID;
 
         await days.create({
             day: DayModel.day,
             title: DayModel.title,
             bodypart: DayModel.bodypart,
             surface: DayModel.surface,
-            days_id: 123,
+            days_id: days_id,
             planID: DayModel.planID
         })
+        return days_id;
     }
 
     async getPlan(): Promise<PlanModel | null> {

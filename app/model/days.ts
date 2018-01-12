@@ -18,7 +18,7 @@ module.exports = (app: Application) => {
             type: INTEGER,
         },
         days_id: {
-            type: INTEGER,
+            type: BIGINT,
             allowNull: false
         }
     });

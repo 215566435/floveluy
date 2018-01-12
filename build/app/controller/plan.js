@@ -52,6 +52,11 @@ class PlanController extends basecontroller_1.BaseController {
             surface: { type: 'string' },
             planID: { type: 'number' }
         });
+        const days_id = this.service.plan.addDays(this.ctx.request.body);
+        //curl -H "Content-Type: application/json" -X POST --data '{"title":"某一天","day":1,"bodypart":123,"surface":"http://","planID":1}' http://127.0.0.1:7001/trainnote/plan/days
+        this.Success({
+            days_id
+        });
     }
     async tmp_insert() {
         const plan = this.ctx.model.Plan;

@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const egg_1 = require("egg");
+var DATE_UNIQUE_ID = Date.now();
 class PlanService extends egg_1.Service {
     constructor(props) {
         super(props);
@@ -20,14 +21,16 @@ class PlanService extends egg_1.Service {
     }
     async addDays(DayModel) {
         const days = this.ctx.model.Days;
+        const days_id = DATE_UNIQUE_ID + DayModel.day + DayModel.planID;
         await days.create({
             day: DayModel.day,
             title: DayModel.title,
             bodypart: DayModel.bodypart,
             surface: DayModel.surface,
-            days_id: 123,
+            days_id: days_id,
             planID: DayModel.planID
         });
+        return days_id;
     }
     async getPlan() {
         const plan = this.ctx.model.Plan;
