@@ -61,7 +61,6 @@ class PlanController extends basecontroller_1.BaseController {
     async tmp_insert() {
         const plan = this.ctx.model.Plan;
         const days = this.ctx.model.Days;
-        const now = await plan.count();
         await plan.create({
             title: '方正的减脂捷径',
             sub_title: '快速、科学、有策略性的减脂攻略',
