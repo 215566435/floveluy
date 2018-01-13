@@ -58,13 +58,7 @@ class PlanService extends egg_1.Service {
     parseDays(days) {
         if (days) {
             return days.map((day) => {
-                return {
-                    title: day['title'],
-                    day: day['day'],
-                    bodypart: day['bodypart'],
-                    surface: day['surface'],
-                    planID: day['planID']
-                };
+                return day;
             });
         }
         return null;

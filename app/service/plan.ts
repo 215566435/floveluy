@@ -91,13 +91,7 @@ export default class PlanService extends Service {
     parseDays(days: { [string: string]: any }[] | null): DayModel[] | null {
         if (days) {
             return days.map((day: { [string: string]: any }) => {
-                return {
-                    title: day['title'],
-                    day: day['day'],
-                    bodypart: day['bodypart'],
-                    surface: day['surface'],
-                    planID: day['planID']
-                }
+                return <DayModel>day
             })
         }
         return null;
