@@ -10,10 +10,6 @@ const basecontroller_1 = require("../base/basecontroller");
 const router_1 = require("../router");
 const NAME = 'plan';
 class PlanController extends basecontroller_1.BaseController {
-    // async show() {
-    //     //查询计划
-    //     this.ctx.response.body = `你输入的地址是：${this.ctx.params['id']}`;
-    // }
     async dev_init() {
         const app = this.app;
         if (app.config.env === 'local') {
@@ -139,6 +135,6 @@ class PlanController extends basecontroller_1.BaseController {
     }
 }
 __decorate([
-    router_1.get('/abc', NAME)
+    router_1.Routers.get('/abc', NAME)
 ], PlanController.prototype, "abc", null);
 module.exports = PlanController;

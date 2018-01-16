@@ -1,9 +1,11 @@
 import { Model } from 'sequelize';
 import { BaseController } from '../base/basecontroller';
 import { PlanModel, DayModel } from '../service/plan';
-import { get } from '../router';
+import { Routers } from '../router';
+
 
 const NAME = 'plan';
+
 
 class PlanController extends BaseController {
     async dev_init() {
@@ -23,7 +25,7 @@ class PlanController extends BaseController {
         }
     }
 
-    @get('/abc', NAME)
+    @Routers.get('/abc', NAME)
     async abc() {
         this.Success({
             good: '好!'

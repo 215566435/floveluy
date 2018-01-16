@@ -1,32 +1,55 @@
 import { Application } from "egg";
+var route: any = {}
 
-const route: any = {
 
+export const Routers = {
+    get: (url: string, controllerName: string) => {
+        return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+            route[url] = { propertyKey, controllerName, method: 'get' }
+        };
+    },
+    post: (url: string, controllerName: string) => {
+        return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+            route[url] = { propertyKey, controllerName, method: 'post' }
+        };
+    },
+    patch: (url: string, controllerName: string) => {
+        return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+            route[url] = { propertyKey, controllerName, method: 'patch' }
+        };
+    },
+    options: (url: string, controllerName: string) => {
+        return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+            route[url] = { propertyKey, controllerName, method: 'options' }
+        };
+    },
+    delete: (url: string, controllerName: string) => {
+        return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+            route[url] = { propertyKey, controllerName, method: 'delete' }
+        };
+    }
 }
 
-export function get(url: string, controllerName: string) {
-    return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-        console.log({ target, propertyKey, descriptor });
-
-        route[url] = { propertyKey, controllerName }
-    };
+enum Methods {
+    get = 'get',
+    post = 'post',
+    patch = 'patch',
+    options = 'options',
+    delete = 'delete'
 }
-
 
 
 export default (app: Application) => {
 
     const { router, controller } = app;
     Object.keys(route).forEach((key) => {
-        const name = route['/abc'].controllerName;
-        const method = route['/abc'].propertyKey;
-        router.get('/abc', controller[name][method]);
+        const name = route[key].controllerName;
+        const handler = route[key].propertyKey;
+        const method: Methods = route[key].method;
+        router[method](key, controller[name][handler]);
     })
-    const name = route['/abc'].controllerName;
-    const method = route['/abc'].propertyKey;
-    console.log(route['/abc'])
 
-    router.get('/abc', controller[name][method]);
+
     router.post('/', controller.wechat.index);
     router.resources('plan', '/trainnote/plan', controller.plan);
 
