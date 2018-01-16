@@ -6,11 +6,6 @@ import { get } from '../router';
 const NAME = 'plan';
 
 class PlanController extends BaseController {
-    // async show() {
-    //     //查询计划
-    //     this.ctx.response.body = `你输入的地址是：${this.ctx.params['id']}`;
-    // }
-
     async dev_init() {
         const app = this.app;
         if (app.config.env === 'local') {
