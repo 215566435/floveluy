@@ -1,13 +1,9 @@
 import { Model } from 'sequelize';
 import { BaseController } from '../base/basecontroller';
 import { PlanModel, DayModel } from '../service/plan';
+import { get } from '../router';
 
-function log() {
-    return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-        console.log({ target, propertyKey, descriptor })
-    };
-}
-
+const NAME = 'plan';
 
 class PlanController extends BaseController {
     // async show() {
@@ -32,10 +28,16 @@ class PlanController extends BaseController {
         }
     }
 
-    @log()
+    @get('/abc', NAME)
+    async abc() {
+        this.Success({
+            good: '好!'
+        });
+    }
+
     async index() {
         const plan = await this.service.plan.getPlan();
-        console.log(plan);
+
         if (plan) {
             this.Success(plan);
         } else {
@@ -153,6 +155,9 @@ class PlanController extends BaseController {
 declare module 'egg' {
     export interface IController {
         plan: PlanController;
+        [key: string]: {
+            [key: string]: any
+        }
     }
 }
 

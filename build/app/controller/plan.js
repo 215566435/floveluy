@@ -7,11 +7,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const basecontroller_1 = require("../base/basecontroller");
-function log() {
-    return function (target, propertyKey, descriptor) {
-        console.log({ target, propertyKey, descriptor });
-    };
-}
+const router_1 = require("../router");
+const NAME = 'plan';
 class PlanController extends basecontroller_1.BaseController {
     // async show() {
     //     //查询计划
@@ -28,9 +25,13 @@ class PlanController extends basecontroller_1.BaseController {
             });
         }
     }
+    async abc() {
+        this.Success({
+            good: '好!'
+        });
+    }
     async index() {
         const plan = await this.service.plan.getPlan();
-        console.log(plan);
         if (plan) {
             this.Success(plan);
         }
@@ -138,6 +139,6 @@ class PlanController extends basecontroller_1.BaseController {
     }
 }
 __decorate([
-    log()
-], PlanController.prototype, "index", null);
+    router_1.get('/abc', NAME)
+], PlanController.prototype, "abc", null);
 module.exports = PlanController;
