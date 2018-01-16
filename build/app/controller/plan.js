@@ -21,7 +21,7 @@ class PlanController extends basecontroller_1.BaseController {
             });
         }
     }
-    async abc() {
+    async createExercise() {
         this.Success({
             good: '好!'
         });
@@ -135,6 +135,6 @@ class PlanController extends basecontroller_1.BaseController {
     }
 }
 __decorate([
-    router_1.Routers.get('/abc', NAME)
-], PlanController.prototype, "abc", null);
+    router_1.Http.get('/createExercise', NAME)
+], PlanController.prototype, "createExercise", null);
 module.exports = PlanController;

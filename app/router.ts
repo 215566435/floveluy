@@ -2,7 +2,7 @@ import { Application } from "egg";
 var route: any = {}
 
 
-export const Routers = {
+export const Http = {
     get: (url: string, controllerName: string) => {
         return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
             route[url] = { propertyKey, controllerName, method: 'get' }

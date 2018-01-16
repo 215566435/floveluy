@@ -1,7 +1,7 @@
 import { Model } from 'sequelize';
 import { BaseController } from '../base/basecontroller';
 import { PlanModel, DayModel } from '../service/plan';
-import { Routers } from '../router';
+import { Http } from '../router';
 
 
 const NAME = 'plan';
@@ -25,8 +25,8 @@ class PlanController extends BaseController {
         }
     }
 
-    @Routers.get('/abc', NAME)
-    async abc() {
+    @Http.get('/createExercise', NAME)
+    async createExercise() {
         this.Success({
             good: '好!'
         });

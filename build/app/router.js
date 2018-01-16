@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var route = {};
-exports.Routers = {
+exports.Http = {
     get: (url, controllerName) => {
         return function (target, propertyKey, descriptor) {
             route[url] = { propertyKey, controllerName, method: 'get' };

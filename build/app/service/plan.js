@@ -19,6 +19,8 @@ class PlanService extends egg_1.Service {
             id: id
         };
     }
+    async createExercise() {
+    }
     async addDays(DayModel) {
         const days = this.ctx.model.Days;
         const days_id = DATE_UNIQUE_ID + DayModel.day + DayModel.planID;

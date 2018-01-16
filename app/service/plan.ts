@@ -39,6 +39,9 @@ export default class PlanService extends Service {
             id: id
         }
     }
+    async createExercise() {
+
+    }
 
     async addDays(DayModel: DayModel): Promise<number> {
         const days: Model<{}, {}> = this.ctx.model.Days;
