@@ -17,10 +17,15 @@ export function get(url: string, controllerName: string) {
 export default (app: Application) => {
 
     const { router, controller } = app;
+    Object.keys(route).forEach((key) => {
+        const name = route['/abc'].controllerName;
+        const method = route['/abc'].propertyKey;
+        router.get('/abc', controller[name][method]);
+    })
     const name = route['/abc'].controllerName;
     const method = route['/abc'].propertyKey;
     console.log(route['/abc'])
-    Object.getOwnPropertyDescriptor
+
     router.get('/abc', controller[name][method]);
     router.post('/', controller.wechat.index);
     router.resources('plan', '/trainnote/plan', controller.plan);
