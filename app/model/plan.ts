@@ -4,7 +4,7 @@ import { ModelDefine } from './ModelDefine';
 
 
 module.exports = (app: Application) => {
-    const { STRING, TIME, BIGINT, INTEGER } = app.Sequelize;
+    const { STRING, BIGINT } = app.Sequelize;
 
 
     const plan = ModelDefine(app, 'plan', {

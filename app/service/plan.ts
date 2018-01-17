@@ -1,5 +1,4 @@
 import { Service } from "egg";
-import * as cheerio from 'cheerio';
 import { Model } from 'sequelize';
 
 export interface PlanModel {
@@ -17,6 +16,17 @@ export interface DayModel {
     surface: string,
     planID: number
 }
+export interface ExerciseModel {
+    title: string,
+    description: string,
+    image: string,
+    plan_id: number,
+    detail: {
+        [str: string]: any
+    },
+    daysID: number
+}
+
 
 var DATE_UNIQUE_ID = Date.now();
 
@@ -39,8 +49,10 @@ export default class PlanService extends Service {
             id: id
         }
     }
-    async createExercise() {
+    async createExercise(exerciseModel: ExerciseModel) {
+        const exercise: Model<{}, {}> = this.ctx.model.Exercise;
 
+        await exercise.create(exerciseModel);
     }
 
     async addDays(DayModel: DayModel): Promise<number> {

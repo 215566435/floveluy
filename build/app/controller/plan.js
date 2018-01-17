@@ -22,9 +22,11 @@ class PlanController extends basecontroller_1.BaseController {
         }
     }
     async createExercise() {
+        await this.service.plan.createExercise(this.ctx.request.body);
         this.Success({
             good: '好!'
         });
+        //curl -H "Content-Type: application/json" -X POST --data '{"title":"腹肌训练动作2","description":"这个动作非常牛b","image":"http","plan_id":"1","daysID":1}' http://127.0.0.1:7001/createExercise
     }
     async index() {
         const plan = await this.service.plan.getPlan();
@@ -135,6 +137,6 @@ class PlanController extends basecontroller_1.BaseController {
     }
 }
 __decorate([
-    router_1.Http.get('/createExercise', NAME)
+    router_1.Http.post('/createExercise', NAME)
 ], PlanController.prototype, "createExercise", null);
 module.exports = PlanController;

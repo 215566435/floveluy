@@ -1,6 +1,6 @@
 import { Model } from 'sequelize';
 import { BaseController } from '../base/basecontroller';
-import { PlanModel, DayModel } from '../service/plan';
+import { PlanModel, DayModel, ExerciseModel } from '../service/plan';
 import { Http } from '../router';
 
 
@@ -25,11 +25,14 @@ class PlanController extends BaseController {
         }
     }
 
-    @Http.get('/createExercise', NAME)
+    @Http.post('/createExercise', NAME)
     async createExercise() {
+
+        await this.service.plan.createExercise(<ExerciseModel>this.ctx.request.body);
         this.Success({
             good: '好!'
         });
+        //curl -H "Content-Type: application/json" -X POST --data '{"title":"腹肌训练动作2","description":"这个动作非常牛b","image":"http","plan_id":"1","daysID":1}' http://127.0.0.1:7001/createExercise
     }
 
     async index() {

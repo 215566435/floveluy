@@ -19,7 +19,9 @@ class PlanService extends egg_1.Service {
             id: id
         };
     }
-    async createExercise() {
+    async createExercise(exerciseModel) {
+        const exercise = this.ctx.model.Exercise;
+        await exercise.create(exerciseModel);
     }
     async addDays(DayModel) {
         const days = this.ctx.model.Days;
