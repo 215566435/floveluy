@@ -35,6 +35,21 @@ class PlanController extends BaseController {
         //curl -H "Content-Type: application/json" -X POST --data '{"title":"腹肌训练动作2","description":"这个动作非常牛b","image":"http","plan_id":"1","daysID":1}' http://127.0.0.1:7001/createExercise
     }
 
+    @Http.get('/getExcercise', NAME)
+    async getExercise() {
+
+        const excercise = await this.service.plan.getExercise();
+
+        if (excercise) {
+            const one = excercise;
+            console.log(one.title);
+            console.log(one.detail);
+            this.Success({
+                data: one
+            });
+        }
+    }
+
     @Http.get('/plans', NAME)
     async index() {
         const plan = await this.service.plan.getPlan();

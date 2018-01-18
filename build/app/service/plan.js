@@ -23,6 +23,16 @@ class PlanService extends egg_1.Service {
         const exercise = this.ctx.model.Exercise;
         await exercise.create(exerciseModel);
     }
+    async getExercise() {
+        const exercise = this.ctx.model.Exercise;
+        const planData = await exercise.findOne({
+            where: {
+                plan_id: 1,
+                daysID: 1
+            }
+        });
+        return planData;
+    }
     async addDays(DayModel) {
         const days = this.ctx.model.Days;
         const days_id = DATE_UNIQUE_ID + DayModel.day + DayModel.planID;
