@@ -42,8 +42,7 @@ class PlanController extends BaseController {
 
         if (excercise) {
             const one = excercise;
-            console.log(one.title);
-            console.log(one.detail);
+
             this.Success({
                 data: one
             });

@@ -54,7 +54,7 @@ export default class PlanService extends Service {
 
         await exercise.create(exerciseModel);
     }
-    async getExercise() {
+    async getExercise(plan_id: number, daysID: number) {
         const exercise: Model<{}, {}> = this.ctx.model.Exercise;
 
         const planData: { [string: string]: any } | null = await exercise.findOne({
