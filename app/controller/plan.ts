@@ -35,6 +35,7 @@ class PlanController extends BaseController {
         //curl -H "Content-Type: application/json" -X POST --data '{"title":"腹肌训练动作2","description":"这个动作非常牛b","image":"http","plan_id":"1","daysID":1}' http://127.0.0.1:7001/createExercise
     }
 
+    @Http.get('/plans', NAME)
     async index() {
         const plan = await this.service.plan.getPlan();
 
@@ -44,6 +45,7 @@ class PlanController extends BaseController {
             this.Fail('没有相应的计划');
         }
     }
+
     async create() {
         try {
             this.ctx.validate({

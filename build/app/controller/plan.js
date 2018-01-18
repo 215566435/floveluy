@@ -139,4 +139,7 @@ class PlanController extends basecontroller_1.BaseController {
 __decorate([
     router_1.Http.post('/createExercise', NAME)
 ], PlanController.prototype, "createExercise", null);
+__decorate([
+    router_1.Http.get('/plans', NAME)
+], PlanController.prototype, "index", null);
 module.exports = PlanController;

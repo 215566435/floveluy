@@ -47,11 +47,12 @@ export default (app: Application) => {
         const handler = route[key].propertyKey;
         const method: Methods = route[key].method;
         router[method](key, controller[name][handler]);
+        console.log('mapping url-->', 'key', 'handler');
     })
 
 
     router.post('/', controller.wechat.index);
-    router.resources('plan', '/trainnote/plan', controller.plan);
+    // router.resources('plan', '/trainnote/plan', controller.plan);
 
     router.post('/trainnote/plan/days', controller.plan.addDay);
 
