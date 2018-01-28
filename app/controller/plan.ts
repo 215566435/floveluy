@@ -8,6 +8,11 @@ const NAME = 'plan';
 
 
 class PlanController extends BaseController {
+    constructor(props: any) {
+        super(props);
+        console.log('初始化')
+    }
+
     async dev_init() {
         const app = this.app;
         if (app.config.env === 'local') {

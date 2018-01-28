@@ -10,6 +10,10 @@ const basecontroller_1 = require("../base/basecontroller");
 const router_1 = require("../router");
 const NAME = 'plan';
 class PlanController extends basecontroller_1.BaseController {
+    constructor(props) {
+        super(props);
+        console.log('初始化');
+    }
     async dev_init() {
         const app = this.app;
         if (app.config.env === 'local') {

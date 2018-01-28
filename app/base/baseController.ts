@@ -5,6 +5,10 @@ export class BaseController extends Controller {
         super(props);
     }
 
+    /**
+     * 返回正确结果
+     * @param object 
+     */
     Success(object: { [key: string]: any }) {
 
         const Success = {

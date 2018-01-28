@@ -50,7 +50,6 @@ export default (app: Application) => {
         console.log('mapping url-->', 'key', 'handler');
     })
 
-
     router.post('/', controller.wechat.index);
     // router.resources('plan', '/trainnote/plan', controller.plan);
 
