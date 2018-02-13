@@ -5,6 +5,10 @@ class BaseController extends egg_1.Controller {
     constructor(props) {
         super(props);
     }
+    /**
+     * 返回正确结果
+     * @param object
+     */
     Success(object) {
         const Success = {
             Success: true,

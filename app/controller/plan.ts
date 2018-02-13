@@ -43,15 +43,15 @@ class PlanController extends BaseController {
     @Http.get('/getExcercise', NAME)
     async getExercise() {
 
-        const excercise = await this.service.plan.getExercise();
+        // const excercise = await this.service.plan.getExercise();
 
-        if (excercise) {
-            const one = excercise;
+        // if (excercise) {
+        //     const one = excercise;
 
-            this.Success({
-                data: one
-            });
-        }
+        //     this.Success({
+        //         data: one
+        //     });
+        // }
     }
 
     @Http.get('/plans', NAME)

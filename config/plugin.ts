@@ -1,5 +1,5 @@
 import { SequelizeStatic, Sequelize } from 'sequelize';
-
+const path = require('path');
 
 exports.sequelize = {
     enable: true,
@@ -9,6 +9,10 @@ exports.sequelize = {
 exports.validate = {
     enable: true,
     package: 'egg-validate',
+};
+exports.blueprint = {
+    enable: true,
+    path: path.join(__dirname, '../app/lib/egg-blueprint'),
 };
 
 interface ValidateType {
